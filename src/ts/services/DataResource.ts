@@ -9,7 +9,6 @@ export class DataResource<T> {
 
 	async loadOne(id: number): Promise<T> {
 		const res = await fetch(`${this.endpoint}/${id}`);
-
 		return res.json();
 	}
 
@@ -21,11 +20,13 @@ export class DataResource<T> {
 		return res;
 	}
 
-	async save(data: T) {
+	async save(data: T): Promise<Response> {
 		const res = await fetch(this.endpoint, {
 			method: "POST",
 			body: JSON.stringify(data),
 			headers: { "Content-Type": "application/json" },
 		});
+
+		return res;
 	}
 }
